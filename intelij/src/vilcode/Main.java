@@ -27,7 +27,8 @@ public class Main {
         }while (image == null);
         ImageProcessor imageProcessor = new ImageProcessor();
         imageProcessor.grayScale(image);
-        imageLoader.saveImage(image);
+        BufferedImage newImage = imageProcessor.detectEdges(image);
+        imageLoader.saveImage(newImage);
     }
 
 
