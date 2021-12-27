@@ -11,4 +11,7 @@ public class ImageLoader {
         URL url = getClass().getResource(path);
         return ImageIO.read(url);
     }
+    public void saveImage(BufferedImage image) throws IOException {
+        ImageIO.write(image, "jpg", new File("./image.png"));
+    }
 }

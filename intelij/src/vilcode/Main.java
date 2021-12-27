@@ -1,8 +1,11 @@
 package vilcode;
 
 import vilcode.utils.ImageLoader;
+import vilcode.utils.ImageProcessor;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -22,8 +25,9 @@ public class Main {
                 System.out.println("Something went wrong! Please try again.");
             }
         }while (image == null);
-        image.getRGB(1,1);
-        System.out.println("end");
+        ImageProcessor imageProcessor = new ImageProcessor();
+        imageProcessor.grayScale(image);
+        imageLoader.saveImage(image);
     }
 
 
