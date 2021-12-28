@@ -4,20 +4,22 @@ import java.awt.image.BufferedImage;
 
 public class ImageProcessor {
     private final int[][] filter;
+    private final int maskSize = 3;
 
     //maska za pomocą, której nastąpi wykrywanie krawędzi
     public ImageProcessor(){
-        filter = new int[3][3];
+        filter = new int[maskSize][maskSize];
 
-        filter[0][0] = -2;
+        filter[0][0] = 0;
         filter[0][1] = 1;
-        filter[0][2] = -2;
-        filter[1][0] = 1;
-        filter[1][1] = 4;
+        filter[0][2] = 2;
+        filter[1][0] = -1;
+        filter[1][1] = 0;
         filter[1][2] = 1;
         filter[2][0] = -2;
-        filter[2][1] = 1;
-        filter[2][2] = -2;
+        filter[2][1] = -1;
+        filter[2][2] = 0;
+
     }
 
     //funkcja zamieniająca obraz na czarno-biały
@@ -31,21 +33,21 @@ public class ImageProcessor {
     //funkcja, która generuje obraz z wykrytymi krawędziami na podstawie obrazu czarno-białego
     public BufferedImage detectEdges(BufferedImage image){
         BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-        for (int y = 1; y < image.getHeight() - 1; y++)
+        for (int y = maskSize/2; y < image.getHeight() - maskSize/2; y++)
         {
-            for (int x = 1; x < image.getWidth() - 1; x++)
+            for (int x = maskSize/2; x < image.getWidth() - maskSize/2; x++)
             {
                 //przechodzimy przez każdy piksel obrazka
                 int pixelColor = 0;
                 //uzycie maskowania bitowego jest spowodowane sposobem zapisu koloru piksela w BufferedImage
                 // na każdym z 4 bajtów zapisany jest jeden kanał a,r,g,b
                 int alpha = image.getRGB(x, y) & 0xff000000;
-                for (int k = 0; k < 3; k++)
+                for (int k = 0; k < maskSize; k++)
                 {
-                    for (int z = 0; z < 3; z++)
+                    for (int z = 0; z < maskSize; z++)
                     {
                         //stosujemy maskę na jednym kanale, gdyż każdy z kanałów rgb ma taką samą wartość.
-                        pixelColor += (image.getRGB(x - 1 + k, y - 1 + z) & 0xff) * filter[k][z];
+                        pixelColor += (image.getRGB(x - maskSize/2 + k, y - maskSize/2 + z) & 0xff) * filter[k][z];
                     }
                 }
                 //przepisujemy wartość na każdy kanał
