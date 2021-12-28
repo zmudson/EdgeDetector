@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Detector:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Detector_jar</output-path>
+    <root id="archive" name="Detector.jar">
+      <element id="module-output" name="Detector" />
+    </root>
+  </artifact>
+</component>
