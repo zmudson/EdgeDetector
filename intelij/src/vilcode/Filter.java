@@ -1,4 +1,3 @@
-
 package vilcode;
 
 import java.awt.image.BufferedImage;

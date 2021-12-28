@@ -5,7 +5,6 @@ import vilcode.Filter;
 import java.awt.image.BufferedImage;
 
 public class ImageProcessor {
-
     //funkcja zamieniająca obraz na czarno-biały
     public void grayScale(BufferedImage image){
         for(int y = 0; y < image.getHeight(); y++){
