@@ -2,7 +2,7 @@
 
 In the console give the path to the image, and then it will generate the image with detected edges.
 
-The source code is made as IntelliJ project. You can use executable Detector.jar to test it:
+The source code is made as IntelliJ project. You can use the executable Detector.jar to test it:
 ``` java -jar Detector.jar ```
 
 Example: <br>
