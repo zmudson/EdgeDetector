@@ -26,7 +26,6 @@ public class ImageProcessor {
 
     public BufferedImage threshold(BufferedImage image, int minThreshold, int maxThreshold){
         BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
                 int pixelColor = image.getRGB(x, y);
