@@ -15,10 +15,16 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ImageLoader imageLoader = new ImageLoader();
         BufferedImage image = null;
+        String path;
+        String name;
+        String imageType;
 
         do {
             System.out.print("Enter the filename: ");
-            String path = "/resources/images/" + scanner.next();
+            path = scanner.next();
+           // path = "/resources/images/" + name;
+            name = path.substring(0,path.length()-3);
+            imageType = path.substring(path.length()-3, path.length());
             try{
                  image = imageLoader.loadImage(path);
             }catch (IOException ioException){
@@ -37,7 +43,7 @@ public class Main {
         BufferedImage gaussImage = imageProcessor.mask(image, gauss);
         BufferedImage detectedEdges = imageProcessor.mask(gaussImage, filter);
         BufferedImage thresholdImage = imageProcessor.threshold(detectedEdges, 10, 25);
-        imageLoader.saveImage(thresholdImage);
+        imageLoader.saveImage(thresholdImage, name, imageType);
 //        imageLoader.saveImage(newImage);
     }
 
