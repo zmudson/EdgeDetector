@@ -27,8 +27,18 @@ public class Main {
         }while (image == null);
         ImageProcessor imageProcessor = new ImageProcessor();
         imageProcessor.grayScale(image);
-        BufferedImage newImage = imageProcessor.detectEdges(image);
-        imageLoader.saveImage(newImage);
+        Filter filter = new Filter(3, Filter.Type.NORMAL,-2, 1, -2, 1, 4, 1, -2, 1, -2);
+        Filter gauss = new Filter(5, Filter.Type.GAUSS,
+                2,3,5,4,2,
+                4,9,12,9,4,
+                5,12,15,12,5,
+                4,9,12,9,4,
+                2,4,5,4,2);
+        BufferedImage gaussImage = imageProcessor.mask(image, gauss);
+        BufferedImage detectedEdges = imageProcessor.mask(gaussImage, filter);
+        BufferedImage thresholdImage = imageProcessor.threshold(detectedEdges, 10, 25);
+        imageLoader.saveImage(thresholdImage);
+//        imageLoader.saveImage(newImage);
     }
 
 
